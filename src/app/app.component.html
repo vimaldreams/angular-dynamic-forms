@@ -1,4 +1,21 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+  <div class="card m-3">
+    <h5 class="card-header">Angular Dynamic Reactive Forms Example</h5>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Number of TextBox</label>
+          <select formControlName="numberOfTextboxes" class="form-control" (change)="onChangeTextboxes($event)" [ngClass]="{ 'is-invalid': submitted && f.numberOfTextboxes.errors }">
+              <option value=""></option>
+              <option *ngFor="let i of [1,2,3,4,5]">{{i}}</option>
+          </select>
+          <div *ngIf="submitted && f.numberOfTextboxes.errors" class="invalid-feedback">
+              <div *ngIf="f.numberOfTextboxes.errors.required">Number of textbox is required</div>
+          </div>
+
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
